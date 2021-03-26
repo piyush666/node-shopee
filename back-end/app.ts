@@ -1,7 +1,15 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+const dotenv = require("dotenv");
+
+dotenv.config({ path: ".env" });
+const port = process.env.PORT || 8080;
 app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded());
+
+
 app.use("/hello", (req, res, next) => {
   res.status(200);
   res.json({
@@ -19,6 +27,6 @@ app.use((error, req, res, next) => {
     error: error,
   });
 });
-app.listen(3000, () => {
-  console.log("Server is Running on http://localhost:3000/");
+app.listen(port, () => {
+  console.log(`Server is Running on http://localhost:${port}/`);
 });
