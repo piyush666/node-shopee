@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const OrdersSchema = new mongoose.Schema({
   _id: ObjectId,
-  Items: [
+  items: [
     {
       product: {
         type: ObjectId,
@@ -17,16 +17,16 @@ const OrdersSchema = new mongoose.Schema({
     enum: ["placed", "delivered"],
   },
   total: Number,
-  Currency: String,
-  PaymentStatus: {
+  currency: String,
+  paymentStatus: {
     type: String,
     enum: ["paid", "pending"],
   },
-  PaymentMode: {
+  paymentMode: {
     type: String,
     enum: ["cod", "card", "upi"],
   },
-  User: {
+  user: {
     type: ObjectId,
     ref: "users",
   },

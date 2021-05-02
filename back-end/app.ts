@@ -4,6 +4,9 @@ const app = express();
 const dotenv = require("dotenv");
 // const AuthRoute = require('./routes/authRoute')
 import AuthRoute from "./routes/authRoute";
+import ProductRoute from "./routes/productRoute";
+import CartRoute from "./routes/cartRoute";
+import OrderRoute from "./routes/orderRoute";
 import mongoose from "mongoose";
 mongoose.connect("mongodb://localhost:27017/nodeShop");
 dotenv.config({ path: ".env" });
@@ -26,6 +29,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/auth", AuthRoute);
+app.use("/product", ProductRoute);
+app.use("/cart", CartRoute);
+app.use("/order", OrderRoute);
 
 app.use("/hello", (req, res, next) => {
   res.status(200);
@@ -39,6 +45,7 @@ app.use((req, res, next) => {
   next(error);
 });
 app.use((error, req, res, next) => {
+  console.log(error);
   res.status(error.status || 500);
   res.json({
     error: error,

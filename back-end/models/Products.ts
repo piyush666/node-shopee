@@ -8,9 +8,9 @@ const ProductSchema = new mongoose.Schema({
     model: String,
     releaseDate: Date,
   },
-  Price: Number,
-  Currency: String,
-  Image: {
+  price: { type: Number, required: true },
+  currency: { type: String, default: "Rs" },
+  image: {
     data: Buffer,
     contentType: String,
   },
