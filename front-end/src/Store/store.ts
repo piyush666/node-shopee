@@ -6,7 +6,7 @@ import rootSaga from './Sagas';
 // ...
 
 const reduxSagaMonitorOptions = {};
-const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
+const sagaMiddleware = createSagaMiddleware();
 const { run: runSaga } = sagaMiddleware;
 
 // Create the store with saga middleware

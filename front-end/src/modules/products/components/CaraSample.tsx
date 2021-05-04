@@ -18,34 +18,36 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+export default function MediaCard({ data }: any) {
   const classes = useStyles();
 
   return (
-    <Grid item style={{padding:'1rem 0'}}>
+    <Grid item style={{ padding: "1rem 0" }}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image='https://i.imgur.com/qyD45q1.jpeg'
+            image="https://i.imgur.com/qyD45q1.jpeg"
             title="Contemplative Reptile"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Lizard
+              {data.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              {data.description}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {`${data.price} ${data.currency}`}
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Button size="small" color="primary">
-            Share
+            Buy
           </Button>
           <Button size="small" color="primary">
-            Learn More
+            Add to Cart
           </Button>
         </CardActions>
       </Card>

@@ -1,6 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../../Store/store";
 import { takeLatest, put, select } from "redux-saga/effects";
+import { listApi } from "./ApiCalls";
 // Define a type for the slice state
 interface IProduct {
   value: number;
@@ -46,18 +47,24 @@ export const {
 // export const selectCount = (state: RootState) => state.counter.value;
 const selectDomain = (state: RootState) => state.product || initialState;
 
-export const selectProdctState = createSelector(
-  [selectDomain],
-  (state: any) => state.product
+export const selectProdctState  = createSelector(
+  selectDomain,
+  (state: any) => state
 );
 
 function BackendCall(): any {
-  return { success: true, data: [] };
+  return { success: true, data: ["dddd"] };
 }
-async function* listProduct() {
+
+interface IData {
+  success: boolean;
+  data: any;
+}
+function* listProduct() {
   try {
     //call to backend
-    const res: any = await BackendCall();
+    const res: IData = yield listApi();
+    console.log(res)
     if (res.success) {
       yield put(productActions.listProductSuccess(res.data));
     }
@@ -67,5 +74,5 @@ async function* listProduct() {
 }
 // export default counterSlice.reducer;
 export function* productSaga() {
-  yield takeLatest(productActions.listProduct, listProduct);
+  yield takeLatest(productActions.listProduct.type, listProduct);
 }
