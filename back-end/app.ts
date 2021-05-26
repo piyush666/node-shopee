@@ -10,7 +10,6 @@ import OrderRoute from "./routes/orderRoute";
 import mongoose from "mongoose";
 mongoose.connect("mongodb://localhost:27017/nodeShop");
 dotenv.config({ path: ".env" });
-const port = process.env.PORT || 8080;
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -52,6 +51,6 @@ app.use((error, req, res, next) => {
     message: "not found",
   });
 });
-app.listen(port, () => {
-  console.log(`Server is Running on http://localhost:${port}/`);
-});
+
+
+export { app };
